@@ -1,0 +1,4 @@
+$ curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |    1:  Downloading the ebook using curl.
+> tr '[:upper:]' '[:lower:]' | 												2: Converting the entire text to lower case using tr.> grep -oE '\w+' | 													3: Extracting all the words using grep and putting each word on a separate line.> sort | 																4: Sorting these words in alphabetical order using sort.> uniq -c | 															5: Removing all the duplicates and counting how often each word appears in the list using uniq.
+ > sort -nr | 															6: Sorting this list of unique words by their count in descending order using sort.
+ > head -n 10 														7: Keeping only the top 10 lines using head.  

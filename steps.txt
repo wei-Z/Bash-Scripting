@@ -1,0 +1,22 @@
+1. from html to json
+http://stackoverflow.com/questions/32960857/how-to-convert-arbirtrary-simple-json-to-csv-using-jq
+https://unix.stackexchange.com/questions/166359/how-to-grep-the-output-of-curl
+
+
+scrape html: curl or wget + regex -> data
+https://unix.stackexchange.com/questions/103252/how-do-i-get-a-websites-title-using-command-line
+
+# method #1
+wget -qO- 'http://www.youtube.com/watch?v=Dd7dQh8u4Hc' |
+  perl -l -0777 -ne 'print $1 if /<title.*?>\s*(.*?)\s*<\/title/si'
+
+# method #2
+curl 'https://www.youtube.com/watch?v=Dd7dQh8u4Hc' -so - | grep -iPo '(?<=<title>)(.*)(?=</title>)'
+
+2. from json  to cvs 
+json2csv: from json format to cvs file
+
+https://unix.stackexchange.com/questions/163845/using-jq-to-extract-values-and-format-in-csv
+
+http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html
+

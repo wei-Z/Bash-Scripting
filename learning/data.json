@@ -1,0 +1,5 @@
+{"@context": "http://json-ld.org/contexts/person.jsonld","@id": 1,"name": "John Lennon","born": "1940-10-09","spouse": "http://dbpedia.org/resource/Cynthia_Lennon"}
+{"@context": "http://json-ld.org/contexts/person.jsonld","@id": 2,"name": "John Lennon","born": "1940-10-09","spouse": "http://dbpedia.org/resource/Cynthia_Lennon"}
+{"@context": "http://json-ld.org/contexts/person.jsonld","@id": 3,"name": "John Lennon","born": "1940-10-09","spouse": "http://dbpedia.org/resource/Cynthia_Lennon"}
+{"@context": "http://json-ld.org/contexts/person.jsonld","@id": 4,"name": "John Lennon","born": "1940-10-09","spouse": "http://dbpedia.org/resource/Cynthia_Lennon"}
+{"@context": "http://json-ld.org/contexts/person.jsonld","@id": 5,"name": "John Lennon","born": "1940-10-09","spouse": "http://dbpedia.org/resource/Cynthia_Lennon"}

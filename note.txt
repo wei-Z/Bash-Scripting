@@ -1,0 +1,34 @@
+1. http://www.joyofdata.de/blog/using-linux-shell-web-scraping/
+~> echo "http://www.bbc.com" |
+   wget -O- -i- | 
+   hxnormalize -x | 
+   hxselect -i "div.most_popular_content" |  
+   lynx -stdin -dump > theMostPoupularInNews
+
+First the echo pipes the URL to wget. I could have also provided the URL directly in the arguments but I chose to do it like this to make clear that the URL or a list of URLs itself might be the result of processing. wget fetches the HTML code from BBC, which is then normalized by hxnormalize to improve digestability by hxselect (both installed on Ubuntu by sudo apt-get install html-xml-utils), which then extracts the part of the code being identified by the CSS selector. Lynx finally turns the code into a layouted text that you would see in a browser.
+
+2. Basic Web Scraping with Curl
+http://erik.silfversten.se/basic-web-scraping-with-curl/
+
+3. Extract data from the Internet with Web scraping
+https://www.linux.com/news/extract-data-internet-web-scraping
+
+4. Data scraping with wget and regex 
+http://stackoverflow.com/questions/7361229/data-scraping-with-wget-and-regex
+
+
+curl http://www.gutenberg.org/files/76/76-0.txt > finn.txt
+
+05/20:
+7 command-line tool
+http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html
+
+using the linux shell
+http://www.joyofdata.de/blog/using-linux-shell-web-scraping/
+
+Extracting data from Wikipedia using curl. grep…
+http://loige.co/extracting-data-from-wikipedia-using-curl-grep-cut-and-other-bash-commands/
+
+Shell script using curl to loop through urls
+http://stackoverflow.com/questions/16131321/shell-script-using-curl-to-loop-through-urls
+

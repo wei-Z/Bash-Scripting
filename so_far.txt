@@ -1,0 +1,7 @@
+# the following is output all span string with all the data we need, but we need to cut out some unneeded data
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+
+# next, how to recognize only the data we want …
+
+
+
