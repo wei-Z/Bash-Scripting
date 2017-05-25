@@ -11,7 +11,7 @@ wget -qO- 'http://www.youtube.com/watch?v=Dd7dQh8u4Hc' |
   perl -l -0777 -ne 'print $1 if /<title.*?>\s*(.*?)\s*<\/title/si'
 
 # method #2
-curl 'https://www.youtube.com/watch?v=Dd7dQh8u4Hc' -so - | grep -iPo '(?<=<title>)(.*)(?=</title>)'
+
 
 2. from json  to cvs 
 json2csv: from json format to cvs file

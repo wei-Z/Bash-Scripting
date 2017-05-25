@@ -3,5 +3,15 @@ curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - | grep -iPo '
 
 # next, how to recognize only the data we want …
 
+# trying to use another grep before to get table part
+
+# part I: to get table header
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+
+# part II: to get table content
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=)(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+
+
+
 
 
