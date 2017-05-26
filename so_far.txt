@@ -1,15 +1,31 @@
+# example: using curl and grep to get YoutTube title
+curl 'http://www.youtube.com/watch?v=Dd7dQh8u4Hc' -so - | \
+    grep -iPo '(?<=<title>)(.*)(?=</title>)'
+
+
 # the following is output all span string with all the data we need, but we need to cut out some unneeded data
 curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+
 
 # next, how to recognize only the data we want …
 
 # trying to use another grep before to get table part
 
-# part I: to get table header
-curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+## part I: to get table header
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' 
 
-# part II: to get table content
+# —improvement: now <span> and </span> is taken off
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'
+
+
+## part II: to get table content
+# the following will give every span… not exactly what I need
 curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=)(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+
+# this will give the td content only which works
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=\"BdT Bdc\(\$lightGray\) Ta\(end\) Fz\(s\)\")(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>'
+# this will take off <span> and </span>
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=\"BdT Bdc\(\$lightGray\) Ta\(end\) Fz\(s\)\")(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'
 
 
 
