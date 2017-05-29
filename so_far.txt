@@ -17,6 +17,12 @@ curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(
 # —improvement: now <span> and </span> is taken off
 curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'
 
+#  add ‘,’ to each output
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g' | sed 's/$/,/'
+
+# This will put the titles into cvs  as header row
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g' | sed 's/$/,/' | xargs > file.csv
+
 
 ## part II: to get table content
 # the following will give every span… not exactly what I need
@@ -28,6 +34,14 @@ curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(
 curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=\"BdT Bdc\(\$lightGray\) Ta\(end\) Fz\(s\)\")(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'
 
 
+# might help
+—bash output to csv columns
+https://stackoverflow.com/questions/25788520/bash-output-to-csv-columns
+http://www.linuxquestions.org/questions/linux-newbie-8/howto-ls-output-to-csv-format-808545/
+https://stackoverflow.com/questions/4935278/concatenate-a-string-to-the-end-of-every-output-line-in-bash-csh
 
+
+—good source for everything
+http://www.tldp.org/LDP/abs/html/textproc.html
 
 
