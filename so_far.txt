@@ -48,6 +48,29 @@ https://stackoverflow.com/questions/27388136/send-the-unix-output-to-a-csv-file
 6.
 https://stackoverflow.com/questions/28700492/bash-script-to-generate-csv-file-from-text
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# will this work?
+http://www.unix.com/shell-programming-and-scripting/221925-need-help-inserting-data-text-file-excel-using-shell-script.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to understand the following?
+
+seq 20|xargs -n5| awk '{for (i=1;i<=NF;i++) a[i,NR]=$i; }END{
+    for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++)printf a[i,j]" "; print "" }}' 
+output:
+1 6 11 16 
+2 7 12 17 
+3 8 13 18 
+4 9 14 19 
+5 10 15 20
+
+seq 20| awk -vn=5 '{a[NR]=$0}END{ x=1; while (x<=n){ for(i=x;i<=length(a);i+=n) printf a[i]" "; print ""; x++; } }' 
+output:
+1 6 11 16 
+2 7 12 17 
+3 8 13 18 
+4 9 14 19 
+5 10 15 20 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # might help
 —bash output to csv columns
