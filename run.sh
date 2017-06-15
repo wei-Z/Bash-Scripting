@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=\"BdT Bdc\(\$lightGray\) Ta\(end\) Fz\(s\)\")(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g' | awk '{printf "%s,", $0} NR % 7==0 {print ""}' >> res.csv
