@@ -38,6 +38,15 @@ curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(
 
 
 
+########concatenate header and content into one output and put into cvs file
+{ curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'; curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=\"BdT Bdc\(\$lightGray\) Ta\(end\) Fz\(s\)\")(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'; } | awk '{printf "%s,", $0} NR%7==0{print ""}' >> test.csv
+
+######comma in the last column will give problems by splitting into 3 columns instead of one, thus
+###### remove comma before inserting into a cvs file
+{ curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<thead data-reactid=)(.*)(?=</thead>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'; curl 'https://in.finance.yahoo.com/quote/GOOG/history?ltr=1' -so - |grep -iPo '(?<=<tr class=\"BdT Bdc\(\$lightGray\) Ta\(end\) Fz\(s\)\")(.*)(?=</tr>)' | grep -iPo '<span data-reactid="[1-9][0-9]*">(.*?)</span>' | sed -e 's/<[^>]*>//g'; } | sed 's/[,]//g'| awk '{printf "%s,", $0} NR%7==0{print ""}' >> res.csv
+
+
+
 # awk, pr: split input
 1. 
 https://stackoverflow.com/questions/14519372/put-every-n-rows-of-input-into-a-new-column
